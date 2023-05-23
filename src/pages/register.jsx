@@ -58,10 +58,10 @@ const Register = () => {
   }
   return (
     <>
-    <div>
+    
       <Particle/>
       <div className="flex justify-content-center">
-        <Card title="Register" className="mt-8">
+        <Card title="Register" className="mt-8 z-1 opacity-70">
           <form>
             <div className="flex flex-column mb-4">
               <span className='p-float-label'>
@@ -71,6 +71,7 @@ const Register = () => {
                   name="username"
                   onChange={handleChangeInput}
                   onBlur={validatePass}
+                  style={{width:"260px"}}
                 />
                 <label htmlFor='username'>Username</label>
               </span>
@@ -83,10 +84,11 @@ const Register = () => {
                   onChange={handleChangeInput}
                   name="email"
                   onBlur={validateEmail}
-                />
+                  style={{width:"260px"}}
+                  />
                 <label htmlFor='email'>Email</label>
-              {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
               </span>
+                  {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
             </div>
             <div className="flex flex-column mb-4">
               <span className='p-float-label'>
@@ -122,9 +124,11 @@ const Register = () => {
              icon="pi pi-check"
              disabled={isButtonDissable}
               />
+              <div className='flex flex-column mb-4'>
+                <p>Do you have account?<span><a href='/login'>Login</a></span></p>
+              </div>
           </form>
         </Card>
-      </div>
       </div>
     </>
   )
