@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Password } from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
@@ -7,6 +7,8 @@ import { Button } from 'primereact/button';
 import { registerUser } from '../services/auth';
 import { useNavigate } from 'react-router-dom';
 import Particle from '../component/BackgroundParticles';
+import {Toast} from 'primereact/toast';
+import Navbar from '../component/Navbar';
 
 const Register = () => {
   // const [username, setUsername] = useState("");
@@ -20,7 +22,7 @@ const Register = () => {
     email: "",
     password: ""
   })
-
+  const toastRef= useRef(null);
   const validatePass = ()=>{
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if(regis.username.length,regis.email <1){
@@ -40,6 +42,7 @@ const Register = () => {
       setEmailError("");
     }
   }
+  
   const navigate = useNavigate();
   const handleChangeInput = (e) => {
     const { name, value } = e.target
@@ -53,15 +56,15 @@ const Register = () => {
       console.log(response.regis);
       navigate("/login")
     } catch (error) {
-      alert("Username atau email sudah ada!");
+      toastRef.current.show({ severity: 'error', summary: 'Registrasi Gagal', detail: 'Username atau Email sudah ada' });
     }
   }
   return (
     <>
-    
       <Particle/>
       <div className="flex justify-content-center">
         <Card title="Register" className="mt-8 z-1 opacity-70">
+          <Toast ref={toastRef}/>
           <form>
             <div className="flex flex-column mb-4">
               <span className='p-float-label'>
@@ -118,10 +121,10 @@ const Register = () => {
             </div>
             <Button
              label="Submit"
-             className="w-full"
+             className="w-full custom-button"
              onClick={handleSubmit} 
              type="submit" 
-             icon="pi pi-check"
+            //  icon="pi pi-check"
              disabled={isButtonDissable}
               />
               <div className='flex flex-column mb-4'>

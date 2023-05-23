@@ -8,7 +8,7 @@ const Dashboard = () => {
     <>
       <div>Dashboard</div>
       <div className="card flex justify-content-center">
-        <Button label="Check" icon="pi pi-check" onClick={()=>navigasi("/register")} />
+        <Button label="Check" icon="pi pi-check" onClick={()=>navigasi("/register")} className="custom-button"/>
       </div>
     </>
   );
