@@ -2,4 +2,44 @@
     background: linear-gradient(to right, rgb(223, 156, 32), rgb(114, 77, 8));
     color: #ffffff;
   }
+  .custom-button:hover{
+    background: linear-gradient(to right, rgb(238, 181, 76), rgb(189, 128, 16));
+    color: #ffffff;
+  }
+  .topbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  .card-profile{
+    position: sticky;
+    top: 10%;
+    left: 70%;
+    right: 0;
+    z-index: 1;
+  }
+  @media (max-width: 820px) {
+    .card-profile {
+      display: none;
+    }
+  }
+  @media (max-width: 820px) {
+    .artikel {
+      width: 100%;
+    }
+  }
+  @media (max-width: 500px) {
+    .card-item {
+      flex: 0 0 50%;
+       /* Set lebar card menjadi 100% agar card sejajar ke bawah */
+    }
+  }
+  @media (max-width: 500px) {
+    .article-content {
+      flex: 0 0 100%;
+       /* Set lebar card menjadi 100% agar card sejajar ke bawah */
+    }
+  }
   
