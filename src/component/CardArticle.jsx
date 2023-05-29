@@ -2,8 +2,27 @@ import { Card } from 'primereact/card';
 import { Avatar } from 'primereact/avatar';
 import { Button } from 'primereact/button';
 import Image from '../assets/marlyn.jpg';
+import { useState } from 'react';
 
 const CardArticle = () => {
+    const [like, setLike]=useState(0);
+    const [isLiked, setIsLiked]=useState(false);
+    const [isLoggedIn, setIsLoggedIn]=useState(false);
+    const [disableButton, setDisableButton]=useState(true);
+
+    const handleLogin = ()=>{
+        setIsLoggedIn(true);
+        setDisableButton(false);
+    }
+    const handleLike = ()=>{
+        if(isLiked){
+            setLike(like - 1);
+            setIsLiked(false);
+        }else{
+            setLike(like + 1);
+            setIsLiked(true);
+        }
+    }
     return (
         <div className="card">
             <Card>
@@ -24,6 +43,11 @@ const CardArticle = () => {
                     </div>
                 </div>
                 <div className='flex justify-content-around mt-3'>
+                    <span>0</span>
+                    <span>0</span>
+                    <span>{like}</span>
+                </div>
+                <div className='flex justify-content-around mt-3'>
                     <div className='flex align-items-center justify-content-center'>
                         <Button icon="pi pi-reply" label='Share' severity='secondary' text/>
                     </div>
@@ -31,7 +55,13 @@ const CardArticle = () => {
                         <Button icon="pi pi-comment" label='Comment' severity='secondary' text/>
                     </div>
                     <div className='flex align-items-center justify-content-center'>
-                        <Button icon="pi pi-thumbs-up" label='Like' severity='secondary' text/>
+                        {
+                            isLoggedIn ? (
+                                <Button onClick={handleLike} icon={isLiked?"pi pi-thumbs-up-fill":"pi pi-thumbs-up"} label='Like' severity='secondary' text/>
+                            ):(
+                                <Button icon="pi pi-thumbs-up" onClick={handleLogin} disabled={disableButton} label='Like' severity='secondary' text/>
+                            )
+                        }
                     </div>
                 </div>
             </Card>

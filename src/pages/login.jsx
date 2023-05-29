@@ -23,7 +23,7 @@ const Login = () => {
     try {
       await login(userName, password);
       // showToast();
-      toast.success("Login success!");
+      // toast.success("Login success!");
       navigate("/");
       // setIsLoading(false)
     } catch (error) {
@@ -35,6 +35,7 @@ const Login = () => {
         summary: "Error Message",
         detail: "Login failed!",
       });
+      console.log(error)
     }
   };
   return (
