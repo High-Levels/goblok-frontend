@@ -7,13 +7,10 @@ import { useState } from 'react';
 const CardArticle = () => {
     const [like, setLike]=useState(0);
     const [isLiked, setIsLiked]=useState(false);
-    const [isLoggedIn, setIsLoggedIn]=useState(false);
-    const [disableButton, setDisableButton]=useState(true);
+    const [isLoggedIn]=useState(
+        localStorage.getItem('refreshToken') !== null
+    );
 
-    const handleLogin = ()=>{
-        setIsLoggedIn(true);
-        setDisableButton(false);
-    }
     const handleLike = ()=>{
         if(isLiked){
             setLike(like - 1);
@@ -49,17 +46,31 @@ const CardArticle = () => {
                 </div>
                 <div className='flex justify-content-around mt-3'>
                     <div className='flex align-items-center justify-content-center'>
-                        <Button icon="pi pi-reply" label='Share' severity='secondary' text/>
-                    </div>
-                    <div className='flex align-items-center justify-content-center'>
-                        <Button icon="pi pi-comment" label='Comment' severity='secondary' text/>
+                        {
+                            isLoggedIn ? (
+                                <Button icon="pi pi-reply" label='Share' severity='secondary' text/>
+                            ):(
+                                <Button icon="pi pi-reply" disabled="disable" label='Share' severity='secondary' text/>
+                            )
+                        }
+                        {/* <Button icon="pi pi-reply" label='Share' severity='secondary' text/> */}
                     </div>
                     <div className='flex align-items-center justify-content-center'>
                         {
                             isLoggedIn ? (
-                                <Button onClick={handleLike} icon={isLiked?"pi pi-thumbs-up-fill":"pi pi-thumbs-up"} label='Like' severity='secondary' text/>
+                                <Button icon="pi pi-comment" label='Comment' severity='secondary' text/>
                             ):(
-                                <Button icon="pi pi-thumbs-up" onClick={handleLogin} disabled={disableButton} label='Like' severity='secondary' text/>
+                                <Button icon="pi pi-comment" disabled="disable" label='Comment' severity='secondary' text/>
+                            )
+                        }
+                    </div>
+                    <div className='flex align-items-center justify-content-center'>
+                        {
+                            isLoggedIn ? (
+                                
+                                <Button onClick={handleLike} icon={isLiked?"pi pi-thumbs-up-fill":"pi pi-thumbs-up"} label='Like' severity='secondary' text/>
+                                ):(
+                                <Button icon="pi pi-thumbs-up" disabled="disable" label='Like' severity='secondary' text/>
                             )
                         }
                     </div>
