@@ -5,10 +5,13 @@ import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 import { Dialog } from 'primereact/dialog';
 import { useState } from 'react';
-import AvatarpProfile from './AvatarpProfile';
+import EditProfile from './EditProfile';
 
 
 const CardProfile = () => {
+    const [isLoggedIn] = useState(
+        localStorage.getItem("refreshToken")
+    );
     const navigasi = useNavigate()
     const handleLogout = () => {
         try {
@@ -128,11 +131,15 @@ const CardProfile = () => {
                     label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
-                        {
-                            label: ' Logout',
-                            icon: 'pi pi-sign-out',
-                            command: handleLogout
-                        }
+                        isLoggedIn?(
+                            {
+                                label: ' Logout',
+                                icon: 'pi pi-sign-out',
+                                command: handleLogout
+                            }
+                        ):(
+                            {}
+                        )
                     ]
                 }
             ]
@@ -152,8 +159,8 @@ const CardProfile = () => {
         <div className="card text-center card-profile">
             <Card>
                 <Avatar icon="pi pi-user-edit" size="xlarge" onClick={showDialog}/>
-                <Dialog header="Modal Title" visible={visible} onHide={hideDialog}>
-                    <AvatarpProfile/>
+                <Dialog header="Edit Profile" className='text-center' visible={visible} onHide={hideDialog}>
+                    <EditProfile/>
                 </Dialog>
                 <h4>Username</h4>
                 <div className="card flex justify-content-center mt-2">
