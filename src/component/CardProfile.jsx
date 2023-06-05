@@ -154,11 +154,19 @@ const CardProfile = () => {
     const hideDialog = () => {
         setVisible(false);
     };
-
+    const profileImage = localStorage.getItem("profileImage")
     return (
         <div className="card text-center card-profile">
             <Card>
-                <Avatar icon="pi pi-user-edit" size="xlarge" onClick={showDialog}/>
+                <div>
+                    {
+                        profileImage ?(
+                            <img src={profileImage} onClick={showDialog} style={{width:"100px", borderRadius:"50%" }} alt="profile"/>
+                        ):(
+                            <Avatar icon="pi pi-user-edit" size="xlarge" onClick={showDialog}/>
+                        )
+                    }
+                </div>
                 <Dialog header="Edit Profile" className='text-center' visible={visible} onHide={hideDialog}>
                     <EditProfile/>
                 </Dialog>
