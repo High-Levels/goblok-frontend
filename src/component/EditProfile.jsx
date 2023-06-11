@@ -1,14 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { Avatar } from 'primereact/avatar'
+
 
 const AvatarpProfile = () => {
     const [profileImage, setProfileImage] = useState(null);
-
+    
     const handleImageChange = (e) => {
         setProfileImage(e.target.files[0]);
     };
     const handleProfileUpdate = async (e) => {
+        e.preventDefault();
         // e.preventDefault();
 
         // const formData = new FormData();
@@ -38,12 +41,26 @@ const AvatarpProfile = () => {
             reader.readAsDataURL(profileImage);
           }
     }
+    const image = localStorage.getItem("profileImage");
+    const deleteProfile = (e)=>{
+        e.preventDefault();
+        localStorage.removeItem("profileImage");
+    }
     return (
         <div>
             <form onSubmit={handleProfileUpdate}>
                 <h2>Update Profile</h2>
+                {
+                    image?(
+                        <img src={image} style={{width:"100px", borderRadius:"50%" }} alt="foto"/>
+                        ):(
+                        <Avatar icon='pi pi-user' size='large'/>
+                    )
+                }
+                <br/>
                 <input type="file" onChange={handleImageChange} />
                 <button type="submit">Update</button>
+                <button onClick={deleteProfile}>Delete</button>
             </form>
         </div>
 

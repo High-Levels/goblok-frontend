@@ -2,6 +2,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 
+
 const Banner =()=> {
     const navigate = useNavigate();
     return (
@@ -14,6 +15,7 @@ const Banner =()=> {
                 </p>
                 <br/>
                 <Button icon="pi pi-sign-in" label='Login' onClick={(e)=>(navigate("/login"))}/>
+                
             </Card>
         </div>
     )

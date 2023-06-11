@@ -9,6 +9,7 @@ import 'primeicons/primeicons.css';
 import './index.css';
 import Navbar from './component/Navbar';
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
   <Navbar/>
