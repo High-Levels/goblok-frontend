@@ -168,7 +168,7 @@ const CardProfile = () => {
                         )
                     }
                 </div>
-                <Dialog header="Edit Profile" className='text-center' visible={visible} onHide={hideDialog}>
+                <Dialog className='text-center' visible={visible} onHide={hideDialog}>
                     <EditProfile/>
                 </Dialog>
                 <h4>Username</h4>
