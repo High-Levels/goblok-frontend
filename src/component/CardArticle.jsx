@@ -30,7 +30,7 @@ const CardArticle = () => {
                             <p className='m-3'>Username</p>
                         </div>
                         <h2>Judul Artikel</h2>
-                        <p>
+                        <p className='text-justify'>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
                             numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
                         </p>
