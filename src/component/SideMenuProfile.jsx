@@ -1,15 +1,14 @@
+import React from 'react';
 import { Card } from 'primereact/card';
 import { Avatar } from 'primereact/avatar';
 import { PanelMenu } from 'primereact/panelmenu';
-import Footer from './Footer';
-import { useNavigate, useParams } from 'react-router-dom';
+import Footer from '../component/Footer';
+import { useNavigate } from 'react-router-dom';
 import { Dialog } from 'primereact/dialog';
 import { useState } from 'react';
-import EditProfileImage from './EditProfileImage';
+import EditProfileImage from '../component/EditProfileImage';
 
-
-const CardProfile = (data) => {
-    const {id}=useParams();
+const SideMenuProfile = () => {
     const [isLoggedIn] = useState(
         localStorage.getItem("refreshToken")
     );
@@ -157,31 +156,31 @@ const CardProfile = (data) => {
         setVisible(false);
     };
     const profileImage = localStorage.getItem("profileImage")
-    return (
-        <div className="card text-center card-profile">
-            <Card>
-                <div>
-                    {
-                        profileImage ?(
-                            <img src={profileImage} onClick={()=>(navigasi('/profile'))} style={{width:"100px", borderRadius:"50%" }} alt="profile"/>
-                        ):(
-                            <Avatar icon="pi pi-user-edit" size="xlarge" onClick={()=>(navigasi('/profile'))}/>
-                        )
-                    }
-                </div>
-                <Dialog className='text-center' visible={visible} onHide={hideDialog}>
-                    <EditProfileImage/>
-                </Dialog>
-                <h4>Username</h4>
-                <div className="card flex justify-content-center mt-2">
-                    <PanelMenu model={items} className="w-full md:w-25rem" />
-                </div>
-            </Card>
-            <Card className='mt-2'>
-                <Footer />
-            </Card>
+  return (
+    <div className="card text-center card-profile">
+    <Card>
+        {/* <div>
+            {
+                profileImage ?(
+                    <img src={profileImage} onClick={showDialog} style={{width:"100px", borderRadius:"50%" }} alt="profile"/>
+                ):(
+                    <Avatar icon="pi pi-user-edit" size="xlarge" onClick={showDialog}/>
+                )
+            }
         </div>
-    )
+        <Dialog className='text-center' visible={visible} onHide={hideDialog}>
+            <EditProfileImage/>
+        </Dialog>
+        <h4>Username</h4> */}
+        <div className="card flex justify-content-center mt-1">
+            <PanelMenu model={items} className="w-full md:w-25rem" />
+        </div>
+    </Card>
+    <Card className='mt-2'>
+        <Footer />
+    </Card>
+</div>
+  )
 }
 
-export default CardProfile;
+export default SideMenuProfile;

@@ -4,6 +4,8 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import Articel from "../pages/articel";
 import CreateArticle from "../pages/createArticle";
+import Profile from "../pages/Profile";
+
 
 const router = createBrowserRouter([
     {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
     {
         path: "/create-article",
         element: <CreateArticle/>
+    },
+    {
+        path:"/profile",
+        element:<Profile/>,
     }
 ])
 

@@ -31,3 +31,10 @@ export const login = async (username, password) => {
     throw new Error(error.response.data.Message)
   }
 }
+export const editUser = async (id) => {
+  return await axios.put(`${API_URL}/update/profile/${id}`);
+}
+export const getallUsers = async (id) => {
+  id = id || '';
+  return await axios.get(`${API_URL}/update/profile/${id}`);
+}
