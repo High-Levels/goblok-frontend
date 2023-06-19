@@ -1,35 +1,24 @@
 import React from 'react'
 import { Card } from 'primereact/card'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { Avatar } from 'primereact/avatar'
 import { Dialog } from 'primereact/dialog'
 import EditProfileImage from './EditProfileImage'
+import axios from 'axios'
 
-const initialValue={
-    username:"",
-    email:"",
-    password:"",
-    name:"",
-    gender:"",
-    address:"",
-    birth:"",
-    phoneNumber:""
-}
 const CardProfileDetail = () => {
-    const [user, setUser] = useState(initialValue);
-    const {username, email, password, name, gender, address, birth, phoneNumber}= user
     const [visible, setVisible] = useState(false);
-    
-    const {id}= useParams();
+    const [user, setUser]= useState(null);
 
     useEffect(() => {
-
+        fetchUserData();
     }, []);
     const fetchUserData = async () => {
         try {
-            const response = await axios.get(`/api/user/${id}`);
-            setUser(response.data);
+            const response = await axios.get(`http://13.239.136.211/api/blog/list/users`);
+            const users= response.data.Data[0];
+            setUser(users);
+            console.log(users);
         } catch (error) {
             console.error(error);
         }
@@ -53,11 +42,11 @@ const CardProfileDetail = () => {
                         )
                     }
                 </div>
-                <Dialog className='text-center' visible={visible} onHide={hideDialog}>
+                <Dialog className='text-center' visible={visible} onHide={hideDialog} onClick={fetchUserData}>
                     <EditProfileImage />
                 </Dialog>
                 <div className='flex justify-content-center flex-wrap'>
-                    <h2>Username</h2>
+                    {user && <h2>{user.username}</h2>}
                 </div>
                 <div className='flex justify-content-around flex-wrap'>
                     <div className='flex align-item-center justify-content-center'>
@@ -85,7 +74,10 @@ const CardProfileDetail = () => {
                 </div>
                 <div className='flex flex-column'>
                     <a href='/profile' className='pt-5'>
-                        <i className='pi pi-envelope' style={{ fontSize: "1rem", color: '#708090' }}> kanggayus101@gmail.com</i>
+                        {
+                            user && <i className='pi pi-envelope' style={{ fontSize: "1rem", color: '#708090' }}> {user.email}</i>
+                        }
+                        
                     </a>
                     <a href='/profile' className='pt-5'>
                         <i className='pi pi-phone' style={{ fontSize: "1rem", color: '#708090' }}> 08123456789</i>
